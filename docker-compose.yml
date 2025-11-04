@@ -1,11 +1,17 @@
 # Watchtower .yml 
 services:
   watchtower:
+    env_file: ".env" # Laden der Umgebungsvariablen aus der .env Datei
+      
     image: containrrr/watchtower
     container_name: watchtower
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
-      - WATCHTOWER_CLEANUP=true
-      - WATCHTOWER_SCHEDULE=0 0 4 * * *
+      - WATCHTOWER_CLEANUP=${WATCHTOWER_CLEANUP}
+      - WATCHTOWER_SCHEDULE=${WATCHTOWER_SCHEDULE}
+      - WATCHTOWER_NOTIFICATIONS=${WATCHTOWER_NOTIFICATIONS}
+      - WATCHTOWER_NOTIFICATION_GOTIFY_URL=${WATCHTOWER_NOTIFICATION_GOTIFY_URL}
+      - WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN=${WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN}
+      - WATCHTOWER_LABEL_ENABLE=${WATCHTOWER_LABEL_ENABLE} # Watchtower "Label

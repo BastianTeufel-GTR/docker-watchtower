@@ -1,0 +1,18 @@
+# Watchtower .yml 
+services:
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_SCHEDULE=0 0 4 * * *
+      # Watchtower "Labeling" für bestimmmte Container aktivieren
+      - WATCHTOWER_LABEL_ENABLE=true
+
+# Bestimmten Container zum Update zulassen
+labels:
+  - "com.centurylinklabs.watchtower.enable=true"
+
